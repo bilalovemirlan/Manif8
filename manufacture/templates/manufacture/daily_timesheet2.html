@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+   <style>
+      .button {
+      background-color: #66FF99;
+      border: none;
+      color: black;
+      padding: 20px 34px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 15px;
+      margin: 4px 2px;
+      cursor: pointer;
+      }
+    </style>
+ <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-head-line">Табель на {{ q1 }}</h1>
+						<a href="new_daily_timesheet" class="button">Добавить</a>
+					</div>
+                <title>Табель</title>
+
+
+	<body>
+<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<form action="" method="get">
+                    		<table style="width:30%">
+                    			<tr>
+                           			<td> <label for="date" class="mt-2">ДАТА</label></td>
+                        		<br>
+	                        		<td> <input type="date" class="form-control"  name="q1"/></td>
+                        		<td><button type="submit" class="btn btn-primary rounded-pill">Поиск</button></td>
+                    			</tr>
+            				</table>
+            			</form>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="table-wrap">
+                        <table class="table table-striped">
+						  <thead>
+						    <tr>
+
+						      <th>Дата</th>
+						      <th>Сотрудник</th>
+								<th>Станок</th>
+								<th>Ставка за шт(обуви)</th>
+								<th>Выработка в день</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						  {% for item in timesheet %}
+						    <tr>
+						      <th >{{ item.date }}</th>
+								<td>{{ item.employee }}</td>
+								<td>{{ item.stanok }}</td>
+								<td>{{ item.rate }}</td>
+								<td>{{ item.daily_prod_quant }}</td>
+						    </tr>
+						  {% endfor %}
+						  <tr>
+						      <th>ИТОГО за день</th>
+						      <td>{{ total_emp }}</td>
+							  <th></th>
+							  <th></th>
+							  <td>{{ total_prod }}</td>
+						  </tr>
+						  </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+            </div>
+        </div>
+	</html>
+</div>
+{% endblock %}

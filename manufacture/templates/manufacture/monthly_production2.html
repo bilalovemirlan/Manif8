@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+   <style>
+      .button {
+      background-color: #66FF99;
+      border: none;
+      color: black;
+      padding: 20px 34px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 15px;
+      margin: 4px 2px;
+      cursor: pointer;
+      }
+    </style>
+
+<script>
+	total = 0
+
+	function sum(number) {
+		total = total + number
+	};
+
+	function get_total(number) {
+		res = total
+		total = 0
+		document.getElementById('total-' + number).innerHTML = res;
+	};
+
+</script>
+ <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-head-line">Выработка за период с {{q1}} по {{q2}}</h1>
+
+					</div>
+
+					{% regroup quantities by date as quantities_list %}
+					<ul>
+
+						{% for date in quantities_list %}
+							<li><th >{{ date.grouper }}</th>
+								<ul>
+									{% for item in date.list %}
+										<li>{{ item.catalogue__model }} {{item.catalogue__code}} {{ item.catalogue__color }} - {{item.quantity}} штук</li>
+										<script> sum({{item.quantity}});  </script>
+									{% endfor %}
+									<li> Total: <h5 id="total-{{ forloop.counter }}"></h5><script> get_total({{ forloop.counter }});  </script></li>
+								</ul>
+							</li>
+						{% endfor %}
+
+					</ul>
+
+
+				</div> # 1
+			</div> # 2
+ </div> # 3
+
+<!--<table class="iksweb">-->
+<!--	<tbody>-->
+<!--		<tr>-->
+<!--			<td rowspan="3">Модель</td>-->
+<!--			<td colspan="{{6}}">{{ date.grouper }} </td>-->
+<!--			<td colspan="5"></td>-->
+<!--		</tr>-->
+<!--		<tr>-->
+<!--			<td colspan="3">{{ production.catalogue.code }} </td>-->
+<!--			<td colspan="3"></td>-->
+<!--			<td colspan="3"></td>-->
+<!--			<td colspan="2"></td>-->
+<!--		</tr>-->
+<!--		<tr>-->
+<!--			<td>{{ production.catalogue.color }} </td>-->
+<!--			<td>{{ production.catalogue.color }} </td>-->
+<!--			<td>{{ production.catalogue.color }} </td>-->
+
+<!--		</tr>-->
+<!--		<tr>-->
+<!--			<td>1</td>-->
+<!--			<td></td>-->
+
+<!--		</tr>-->
+<!--		<tr>-->
+<!--			<td>2</td>-->
+
+<!--		</tr>-->
+<!--		<tr>-->
+<!--			<td>3</td>-->
+
+<!--			<td></td>-->
+<!--		</tr>-->
+<!--		<tr>-->
+<!--			<td>4</td>-->
+
+<!--		</tr>-->
+<!--	</tbody>-->
+<!--</table>-->
+<!--	<section class="ftco-section">-->
+<!--		<div class="container">-->
+<!--			<div class="row">-->
+<!--				<div class="col-md-15">-->
+<!--					<div class="table-wrap">-->
+<!--						<table class="table table-striped">-->
+<!--						 <thead>-->
+
+
+<!--								<th >Название</th>-->
+<!--								{{ date.grouper }}-->
+<!--								{% for d in quantities %}-->
+
+<!--								<th >{{ d.catalogue }}</th>-->
+<!--						  		{% endfor %}-->
+
+<!--						  </thead>-->
+
+
+<!--							<tbody>-->
+<!--										{% for i in quantities %}-->
+
+<!--											<tr>-->
+<!--											<th >{{ i.date  }}</th>-->
+<!--												{% for j in i. %}-->
+<!--													<th >{{ j  }}</th>-->
+<!--												{% endfor %}-->
+<!--										{% endfor %}-->
+
+<!--							</tbody>-->
+
+<!--						  </tbody>-->
+<!--						</table>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</section>-->
+
+<!--				</div>-->
+<!--		</div>-->
+<!--	</html>-->
+<!--	</div>-->
+
+
+{% endblock %}

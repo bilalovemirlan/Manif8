@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+    <link rel="icon" href="data:;base64,=">
+    <meta charset="UTF-8">
+    <title>Table</title>
+</head>
+
+<body>
+<div class="container">
+    <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+    <form action="" method="get">
+                    <table style="width:30%">
+                    <tr>
+                           <td> <label for="date" class="mt-2">    Дата с    </label></td>
+                        <br>
+
+
+	                        <td> <input type="date" class="form-control"  name="q1" required/></td>
+
+                        <br>
+
+                            <td><label for="date" class="mt-2">    Дата по     </label> </td>
+                        <br>
+
+
+	                         <td><input type="date" class="form-control"  name="q2" required/></td>
+                        <br>
+
+                        <td> <button type="submit" class="btn btn-primary rounded-pill">   Поиск   </button></td>
+
+
+
+                    </tr>
+            </table>
+            </form>
+
+
+
+  {{df|safe}}
+                </div>
+            </div>
+    </div>
+  </div>
+</body>
+
+{% endblock %}
